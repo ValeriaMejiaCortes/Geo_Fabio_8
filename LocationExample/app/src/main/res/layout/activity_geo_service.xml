@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    tools:context=".geoService">
+
+    <Button
+        android:id="@+id/start"
+        android:layout_width="wrap_content"
+        android:layout_height="73dp"
+        android:layout_margin="20dp"
+        android:background="@color/teal_700"
+        android:backgroundTint="@color/teal_700"
+        android:backgroundTintMode="add"
+        android:paddingLeft="40dp"
+        android:paddingRight="40dp"
+        android:text="MAPS"
+        app:rippleColor="@color/purple_700"
+        app:strokeColor="#CD2626" />
+
+    <Button
+        android:id="@+id/stop"
+        android:layout_width="wrap_content"
+        android:layout_height="111dp"
+        android:layout_margin="20dp"
+        android:paddingLeft="40dp"
+        android:paddingRight="40dp"
+        android:text="Detener servicio de geolocalización" />
+
+</LinearLayout>
