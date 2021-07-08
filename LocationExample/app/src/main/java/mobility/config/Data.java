@@ -1,5 +1,6 @@
 package mobility.config;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 public class Data {
@@ -10,5 +11,5 @@ public class Data {
     public static final String SESSION = "session";
     public static final String TRUE = "true";
     public static final String FALSE = "false";
-    public static JSONObject mecanicos = new JSONObject();
+    public static JSONArray mecanicos = new JSONArray();
 }

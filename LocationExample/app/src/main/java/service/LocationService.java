@@ -90,7 +90,7 @@ public class LocationService extends android.app.Service {
                         try {
                             new Alerts(context).toast("Intentamos enviar posición al servidor");
                             sendData();
-                            fetchMecanicos();
+                            fetchClientes();
                         } catch (JSONException e) {
                             Log.e("Error taskSend", e.toString());
                         }
@@ -101,15 +101,9 @@ public class LocationService extends android.app.Service {
         timer.schedule(task, TIME_REQUEST * 1000, TIME_REQUEST * 1000);
     }
 
-    private void fetchMecanicos() throws JSONException {
-        //Para este ejemplo se está usando la Volley para los consumos HTTP
+    public void fetchClientes() throws JSONException {
 
-        params = new JSONObject();
-        //Parametros a enviar en el request
-        params.put("latitude", storage.get(Data.LATITUDE));
-        params.put("longitude", storage.get(Data.LONGITUDE));
-
-        final String URL = Parameters.SERVER_URL + "/MecanicoApi";
+        final String URL = Parameters.SERVER_URL + "/ClienteApi";
 
         Response.Listener<JSONArray> success = new Response.Listener<JSONArray>() {
             @Override
@@ -117,13 +111,12 @@ public class LocationService extends android.app.Service {
 
                 for (int i = 0; i < response.length(); i++) {
                     try {
-                        Data.mecanicos = response.getJSONObject(i);
-
+                        Data.mecanicos.put(response.getJSONObject(i));
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
                 }
-                Log.d("mecanico" , "" + Data.mecanicos);
+                Log.d("CLIENTE ", "" + response);
             }
         };
 

@@ -3,6 +3,7 @@ package com.example.locationexample;
 import androidx.fragment.app.FragmentActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 
 import com.google.android.gms.maps.CameraUpdate;
@@ -10,9 +11,12 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.example.locationexample.databinding.ActivityMapsBinding;
+
+import org.json.JSONException;
 
 import mobility.config.Data;
 import mobility.storage.DeviceStorage;
@@ -40,7 +44,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         this.latit = Double.parseDouble(storage.get(Data.LATITUDE));
         this.longi = Double.parseDouble(storage.get(Data.LONGITUDE));
 
-
     }
 
     /**
@@ -62,9 +65,19 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         CameraUpdate update = CameraUpdateFactory.newLatLngZoom(myLocation, 15);
         mMap.moveCamera(update);
 
-        /*
+
         for (int i = 0; i < Data.mecanicos.length(); i++) {
-            LatLng location = new LatLng(Data.mecanicos.getJSONObject(, this.longi);
-        }*/
+            try {
+                LatLng newLocation = new LatLng(
+                        Data.mecanicos.getJSONObject(i).getDouble("latitudCliente"),
+                        Data.mecanicos.getJSONObject(i).getDouble("longitudCliente")
+                );
+                mMap.addMarker(new MarkerOptions().position(newLocation).title(
+                        Data.mecanicos.getJSONObject(i).getString("nombreCliente")
+                )).setIcon(BitmapDescriptorFactory.fromResource(R.drawable.realimentacion));
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }
